@@ -14,6 +14,10 @@ PRODUCT_PACKAGES += \
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# Keystore
+PRODUCT_PACKAGES += \
+    android.system.keystore2
+
 # Qcom decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
