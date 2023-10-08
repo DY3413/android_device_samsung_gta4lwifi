@@ -127,3 +127,8 @@ RECOVERY_SDCARD_ON_DATA := true
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
+
+# Hack: prevent anti rollback
+PLATFORM_VERSION := 16.1.0
+PLATFORM_SECURITY_PATCH := 2099-12-31
+VENDOR_SECURITY_PATCH := 2099-12-31
