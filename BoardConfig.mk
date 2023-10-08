@@ -86,6 +86,9 @@ QCOM_BOARD_PLATFORMS += bengal
 # Android Verified Boot
 BOARD_AVB_ENABLE := false
 
+# Properties
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
+
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 103546880
