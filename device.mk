@@ -6,6 +6,7 @@
 #
 
 # Boot control HAL
+PRODUCT_PLATFORM := bengal
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl.recovery \
     bootctrl.$(PRODUCT_PLATFORM).recovery
@@ -17,12 +18,14 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
-    
+
 # Recovery
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+
+TARGET_RECOVERY_DEVICE_MODULES += libion
+RECOVERY_LIBRARY_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
 
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
