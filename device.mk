@@ -39,6 +39,7 @@ TW_HAS_DOWNLOAD_MODE := true
 TW_USE_TOOLBOX := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_NTFS_3G := true
 
 # TWRP Configuration: Logd
