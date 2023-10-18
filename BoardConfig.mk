@@ -9,6 +9,7 @@ DEVICE_PATH := device/samsung/gta4lwifi
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
+TARGET_SUPPORTS_64_BIT_APPS := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -25,7 +26,6 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
 
-TARGET_SUPPORTS_64_BIT_APPS := true
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
@@ -34,39 +34,39 @@ TARGET_BOOTLOADER_BOARD_NAME := bengal
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
-# Kernel
-TARGET_KERNEL_ARCH := arm64
+# DTB
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo
-BOARD_KERNEL_IMAGE_NAME := Image.gz
+
+# DTBO
 BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_KERNEL_CMDLINE := \
-    audit=0 \
-    androidboot.console=ttyMSM0 \
-    androidboot.hardware=qcom \
-    androidboot.memcg=1 \
-    console=ttyMSM0,115200n8 \
-    earlycon=msm_geni_serial,0x4a90000 \
-    firmware_class.path=/vendor/firmware_mnt/image \
-    loop.max_part=7 \
-    lpm_levels.sleep_disabled=1 \
-    msm_rtb.filter=0x237 \
-    service_locator.enable=1 \
-    swiotlb=2048 \
-    video=vfb:640x400,bpp=32,memsize=3072000
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 
-# Enable Permissive kernel
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-
-BOARD_KERNEL_PAGESIZE := 4096
+# Kernel
 BOARD_BOOT_HEADER_VERSION := 2
+BOARD_KERNEL_PAGESIZE := 4096
+
+BOARD_KERNEL_CMDLINE += audit=0
+BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
+BOARD_KERNEL_CMDLINE += androidboot.memcg=1
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200n8
+BOARD_KERNEL_CMDLINE += earlycon=msm_geni_serial,0x4a90000
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
+BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
+BOARD_KERNEL_CMDLINE += service_locator.enable=1
+BOARD_KERNEL_CMDLINE += swiotlb=2048
+BOARD_KERNEL_CMDLINE += video=vfb:640x400,bpp=32,memsize=3072000
+
 BOARD_KERNEL_BASE          := 0x00000000
 BOARD_KERNEL_TAGS_OFFSET   := 0x01e00000
 BOARD_KERNEL_OFFSET        := 0x00008000
 BOARD_KERNEL_SECOND_OFFSET := 0x00000000
 BOARD_RAMDISK_OFFSET       := 0x02000000
 BOARD_DTB_OFFSET           := 0x01f00000
+
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
@@ -76,6 +76,8 @@ BOARD_MKBOOTIMG_ARGS += --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 
 # Platform
 TARGET_BOARD_PLATFORM := bengal
