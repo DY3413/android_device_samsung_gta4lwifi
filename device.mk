@@ -18,6 +18,11 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGES += \
     android.system.keystore2
 
+# fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    fastbootd
+
 # Qcom decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
