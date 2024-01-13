@@ -54,7 +54,9 @@ TARGET_BOARD_PLATFORM := bengal
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno610
 
 # Recovery
+BOARD_HAS_FLIPPED_SCREEN := true
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
