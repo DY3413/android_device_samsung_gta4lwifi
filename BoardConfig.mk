@@ -6,6 +6,9 @@
 
 DEVICE_PATH := device/samsung/gta4lwifi
 
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -18,6 +21,8 @@ TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a9
+
+TARGET_SUPPORTS_64_BIT_APPS := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := bengal
