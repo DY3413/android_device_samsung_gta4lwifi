@@ -52,3 +52,11 @@ BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 # Platform
 TARGET_BOARD_PLATFORM := bengal
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno610
+
+# Recovery
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+
+# TWRP specific build flags
+TW_THEME := portrait_hdpi
+TW_NO_REBOOT_BOOTLOADER := true
+TW_HAS_DOWNLOAD_MODE := true
