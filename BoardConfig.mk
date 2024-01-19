@@ -81,6 +81,7 @@ BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 BOARD_HAS_FLIPPED_SCREEN := true
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+TARGET_USES_MKE2FS := true
 
 # TWRP specific build flags
 TW_THEME := portrait_hdpi
