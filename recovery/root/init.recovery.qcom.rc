@@ -27,9 +27,18 @@
 
 import /init.recovery.qcom_decrypt.rc
 
+on early-init
+    # Mount tracefs
+    mount tracefs tracefs /sys/kernel/tracing
+
 on init
     setprop prepdecrypt.loglevel 2
     setprop prepdecrypt.setpatch true
+
+on post-fs
+    # Make sure /sys/kernel/debug (if present) is labeled properly
+    # Note that tracefs may be mounted under debug, so we need to cross filesystems
+    restorecon --recursive --cross-filesystems /sys/kernel/debug
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -38,6 +47,12 @@ on fs
     # Mount firmware
     mkdir /vendor/firmware_mnt
     mount vfat /dev/block/bootdevice/by-name/apnhlos /vendor/firmware_mnt ro
+
+on late-fs
+    # Ensure that tracefs has the correct permissions.
+    # This does not work correctly if it is called in post-fs.
+    chmod 0755 /sys/kernel/tracing
+    chmod 0755 /sys/kernel/debug/tracing
 
 on property:ro.build.version.security_patch=*
     setprop ro.vendor.build.security_patch ${ro.build.version.security_patch}
