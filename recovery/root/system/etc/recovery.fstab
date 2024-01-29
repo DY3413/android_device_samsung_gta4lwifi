@@ -35,13 +35,10 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 #<src>                                    <mnt_point>    <type>    <mnt_flags and options>    <fs_mgr_flags>
-system                                     /system        ext4        ro                        wait,logical
-system                                     /system        f2fs        ro                        wait,logical
-odm                                        /odm           ext4        ro                        wait,logical
-product                                    /product       ext4        ro                        wait,logical
-vendor                                     /vendor        ext4        ro                        wait,logical
+system                                     /system        ext4      ro,barrier=1,discard       wait,logical,first_stage_mount
+odm                                        /odm           ext4      ro,barrier=1,discard       wait,logical,first_stage_mount
+product                                    /product       ext4      ro,barrier=1,discard       wait,logical,first_stage_mount
+vendor                                     /vendor        ext4      ro,barrier=1,discard       wait,logical,first_stage_mount
 
-/dev/block/bootdevice/by-name/metadata     /metadata      ext4        noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic,sync	wait,check,formattable,wrappedkey
-/dev/block/bootdevice/by-name/userdata     /data          f2fs        noatime,nosuid,nodev,discard,usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678,inlinecrypt	wait,check,fileencryption=ice,wrappedkey,quota
-
-/dev/block/bootdevice/by-name/misc         /misc          emmc        defaults                  defaults
+/dev/block/bootdevice/by-name/userdata     /data          f2fs      noatime,nosuid,nodev,discard,usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678,inlinecrypt   wait,check,quota,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,metadata_encryption=aes-256-xts
+/dev/block/bootdevice/by-name/misc         /misc          emmc      defaults                   defaults
